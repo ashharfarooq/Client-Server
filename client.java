@@ -1,6 +1,6 @@
-package pixel;
 import java.io.*;
 import java.net.*;
+import java.util.Scanner;
 
 public class client {
     public static void main(String args[]) throws IOException 
@@ -14,6 +14,16 @@ public class client {
         // Setup input stream to receive data from the server
         BufferedReader in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
 
+        // Take input from keyboard
+        Scanner s1 = new Scanner(System.in);
+
+        while(true){
+            String line = s1.nextLine();
+            out.println(line);
+             if (line.equalsIgnoreCase("exit")) {
+                break;
+            }
+        }
         // Send message to the server
         out.println("Hello from client!");
 

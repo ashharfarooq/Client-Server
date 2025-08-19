@@ -1,4 +1,3 @@
-package pixel;
 import java.io.*;
 import java.net.*;
 
@@ -14,7 +13,10 @@ public class server {
         System.out.println("Client connected!");
 
         // Setup input and output streams for communication with the client
-        BufferedReader in = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
+        InputStream is = clientSocket.getInputStream();
+        InputStreamReader isr = new InputStreamReader(is);
+        BufferedReader in = new BufferedReader(isr);
+
         PrintWriter out = new PrintWriter(clientSocket.getOutputStream(), true);
 
         // Read message from client
@@ -24,6 +26,11 @@ public class server {
         // Send response to the client
         out.println("Message received by the server.");
 
+        while(true){
+            String exit = in.readLine();
+            if(exit.equals("exit"))
+            break;
+        }
         // Close the client socket
         clientSocket.close();
         // Close the server socket
